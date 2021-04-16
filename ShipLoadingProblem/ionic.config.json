@@ -1,0 +1,7 @@
+{
+  "name": "ShipLoadingProblem",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
