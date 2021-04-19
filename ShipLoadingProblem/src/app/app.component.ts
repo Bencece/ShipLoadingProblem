@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Bemutatás', url: '/folder/Intro', icon: 'boat' },
-    { title: 'Személyre szabás', url: '/folder/Custom', icon: 'shapes' },
-    { title: 'Leírás', url: '/folder/Desc', icon: 'help-circle' },
+    { title: 'Bemutatás', url: '/intro', icon: 'boat' },
+    { title: 'Személyre szabás', url: '/custom', icon: 'shapes' },
+    { title: 'Leírás', url: '/info', icon: 'help-circle' },
   ];
   constructor() {}
 }

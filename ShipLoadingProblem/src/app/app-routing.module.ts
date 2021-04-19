@@ -1,15 +1,26 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { CustomComponent } from './custom/custom.component';
+import { InfoComponent } from './info/info.component';
+import { IntroComponent } from './intro/intro.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Intro',
+    redirectTo: '/intro',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'intro',
+    component: IntroComponent
+  },
+  {
+    path: 'custom',
+    component: CustomComponent
+  },
+  {
+    path: 'info',
+    component: InfoComponent
   }
 ];
 
