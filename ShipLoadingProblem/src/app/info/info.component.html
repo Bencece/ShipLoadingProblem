@@ -16,8 +16,63 @@
 
   <div id="container">
     <h3>Hajórakodási probléma szemléltetése progresszív webalkalmazással 🚢</h3>
+    <ion-item-divider>
+      <h5>Használat</h5>
+    </ion-item-divider>
+      <ul>
+        <li>A képernyőn négy gombot láthatunk, melyek közül az egyik nem használható. Az első három gombbal lehetőség van kiválasztani a megoldandó feladatot.</li>
+        <li>A feladat kiválasztása után, a Lépés gombbal futtathatjuk az algoritmust.</li>
+        <li>Minden egyes gombnyomásra, egy feladat lépést eszünk meg, mindaddig amég el nem érjük az optimális megoldást.</li>
+        <li>A konténereket reprezentáló dobozok különböző színezést kapnak, attól függően, hogy vizsgáljuk őket, vagy sem. Az aktuálisakat világoskék színnel láthatjuk.</li>
+        <li>Mindeközben, az oldal tetején található szövegdobozban folyamatosan követhetjük az éppen aktuális lépés paramétereit.</li>
+        <li>Ha eljutottunk a megoldásig, az optimumba tartozó konténerek zöld színűre váltanak.</li>
+        <li>Egy újabb futtatáshoz, az Újra gomb megnyomása szükséges.</li>
+      </ul>
+    <ion-item-divider>
+      <h5>Jellemzés</h5>
+    </ion-item-divider>
     <p>
-      A probléma a hátizsák feladat egy további korláttal kiegészített típusa. Egy olyan hajót kell megrakni bizonyos nem osztható áruval, melynek ismert a súly és a térfogat korlátja. Ezeken felül ismert az egyes áruk súlya, térfogata és értéke. A megoldás célja meghatározni, hogy az adott korlátok mellett, mennyi az a legnagyobb értékű rakomány, amelyet a hajó elszállíthat.
+      A probléma a hátizsák feladat egy további korláttal kiegészített típusa. Egy olyan hajót kell megrakni bizonyos
+      nem osztható áruval, melynek ismert a súly és a térfogat korlátja. Ezeken felül ismert az egyes áruk súlya,
+      térfogata és értéke. A megoldás célja meghatározni, hogy az adott korlátok mellett, mennyi az a legnagyobb értékű
+      rakomány, amelyet a hajó elszállíthat.
     </p>
+    <p>
+      n -- az árucikkek (tárgyak) típusainak száma,<br>
+
+      a<sub>j</sub> -- j-edik tárgy súlya,<br>
+
+      b<sub>j</sub> -- j-edik tárgy térfogata,<br>
+
+      r<sub>j</sub> -- j-edik tárgy darabszáma,<br>
+
+      c<sub>j</sub> -- j-edik tárgy értéke,<br>
+
+      T -- a hajó rakodási térfogata,<br>
+
+      K -- a hajó rakodási súlya.<br>
+
+      Ha x<sub>j</sub> jelöli a j-edik tárgyból szállítandó ismeretlen darabszámot, akkor a feladatunk a következő alakú
+      LP modellhez vezet:
+    </p>
+    <img src="../../assets/keplet.png" width="100%" alt="keplet">
+    <p>ahol x = (x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub>).</p>
+    <ion-item-divider>
+      <h5>Hivatkozások</h5>
+    </ion-item-divider>
+    <ul>
+      <li>Dr. Bajalinov Erik, Bekéné Rácz Anett: Operációkutatás II. 2010 <a href="https://regi.tankonyvtar.hu/hu/tartalom/tamop425/0046_operaciokutatas_2/ch01s02.html" target="_blank">https://regi.tankonyvtar.hu/hu/tartalom/tamop425/0046_operaciokutatas_2/ch01s02.html</a></li>
+      <li>Ionic keretrendszer <a href="https://ionicframework.com/" target="_blank">https://ionicframework.com/</a></li>
+      <li>JavaScript <a href="https://www.javascript.com/" target="_blank">https://www.javascript.com/</a></li>
+      <li>Angular keretrendszer <a href="https://angular.io/" target="_blank">https://angular.io/</a></li>
+    </ul>
+    <ion-item-divider>
+      <h5>Fejlesztői környezet:</h5>
+    </ion-item-divider>
+    <ul>
+      <li>Windows operációs rendszert futtató számítógép</li>
+      <li>Visual Studio Code</li>
+      <li>Android Studio</li>
+    </ul>
   </div>
 </ion-content>
