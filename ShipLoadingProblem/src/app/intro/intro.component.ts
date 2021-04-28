@@ -18,12 +18,4 @@ export class IntroComponent implements OnInit {
   ngOnInit() {
   }
   
-  testShip = new Ship();
-  c1 = new Container();
-  c2 = new Container(50, 100, 800);
-  c3 = new Container(60, 80, 450);
-  testDock = [this.c1, this.c2, this.c3]
-
-  teszt ="teszt"
-
 }

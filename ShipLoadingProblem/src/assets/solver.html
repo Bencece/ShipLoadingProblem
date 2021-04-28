@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <title>Page Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <button onclick="beallit()">Beállít</button>
+    <button onclick="teszt1()">teszt1</button>
+    <button onclick="teszt2()">teszt2</button>
+    <button onclick="teszt3()">teszt3</button>
+    <button onclick="lepes()">Lepes</button>
+    <br>
+    <p id="info">---</p>
+</body>
+<script>
+    var t;
+    var l;
+    var n;
+    var maxsuly;
+    var maxterfogat;
+    var maxertek;
+    var suly = [];
+    var terfogat = [];
+    var ertek = [];
+    var x = [];
+    var megoldas = [];
+    var lehetmegoldas = [];
+    var eddiglegjobb = [];
+    var emaxert;
+
+    var info;
+    /*
+        function beallit() {
+            for (var i = 0; i < 10; i++) {
+                suly[i] = 0;
+                terfogat[i] = 0;
+                ertek[i] = 0;
+                megoldas[i] = 0;
+                x[i] = 0;
+                eddiglegjobb[i] = 0;
+                for (var j = 0; j < 1024; j++) {
+                    lehetmegoldas[j + 1024 * i] = 0;
+                }
+            }
+            maxsuly = 0;
+            maxterfogat = 0;
+            maxertek = -1000000;
+            emaxert = 0;
+            t = 0;
+            n = 0;
+            l = 0;
+            /*mehet=false;*/
+    //    }
+
+    function beallit() {
+        for (var j = 0; j < 1024; j++) {
+            lehetmegoldas[j] = []
+        }
+        for (var i = 0; i < 12; i++) {
+            suly[i] = 0;
+            terfogat[i] = 0;
+            ertek[i] = 0;
+            megoldas[i] = 0;
+            x[i] = 0;
+            eddiglegjobb[i] = 0;
+            for (var j = 0; j < 1024; j++) {
+                lehetmegoldas[j][i] = 0;
+            }
+        }
+            maxsuly = 0;
+            maxterfogat = 0;
+            maxertek = -1000000;
+            emaxert = 0;
+            t = 0;
+            n = 0;
+            l = 0;
+    }
+
+    function kovetkezoVektor() {
+        var k = 0;
+        if (x[k] == 0) {
+            x[k] = 1;
+        } else {
+            while (x[k] != 0) {
+                x[k] = 0;
+                k++;
+            }
+            x[k] = 1;
+        }
+    }
+
+    function teljesLeszamolas() {
+
+        /*for(var i=0;i<10;i++) {
+			suly[i]=0;
+			terfogat[i]=0;
+			ertek[i]=0;
+			megoldas[i]=0;
+			x[i]=0;
+      eddiglegjobb[i]=0;
+			for(var j=0;j<1024;j++){
+        lehetmegoldas[j+1024*i]=0;
+      }
+		}
+		maxsuly=0;
+		maxterfogat=0;
+		maxertek=-1000000;
+		emaxert = 0;
+		t=0;
+		n=0;
+		l=0;
+
+    maxsuly=10;
+    maxterfogat=10;
+    for(var i=0;i<5;i++) {
+      suly[i]=i+1;
+      terfogat[i]=i+1;
+      ertek[i]=i+1;
+      t++;
+    }*/
+
+        /*maxsuly=10;
+        maxterfogat=10;
+        suly[t] = 3;   terfogat[t] = 13;    ertek[t] = 400;   t++;
+        suly[t]= 8;   terfogat[t] = 7;    ertek[t] = 90;     t++;
+        suly[t]= 11;   terfogat[t] = 6;    ertek[t] = 300;   t++;
+        suly[t] = 14;   terfogat[t] = 21;    ertek[t] = 10;   t++;
+        suly[t] = 5;   terfogat[t] = 4;    ertek[t] = 500;    t++;*/
+
+        maxertek = -1000000;
+        var S;
+        var T;
+        var E;
+        var lepesszam;
+        l = 0;
+        lepesszam = Math.pow(2, t);
+        for (var i = 0; i < lepesszam; i++) {
+            S = 0;
+            T = 0;
+            E = 0;
+            for (var j = 0; j < t; j++) {
+                S = S + (x[j] * suly[j]);
+                T = T + (x[j] * terfogat[j]);
+            }
+            if ((S <= maxsuly) && (T <= maxterfogat)) {
+                for (var j = 0; j < t; j++) {
+                    E = E + (x[j] * ertek[j]);
+                    lehetmegoldas[l][j]= x[j];
+                }
+                l++;
+            }
+            if (E > maxertek) {
+                maxertek = E;
+                for (var j = 0; j < t; j++)
+                    megoldas[j] = x[j];
+            }
+
+            //console.log("S: " + S + " - T: " + T + " - E: " + E)
+            kovetkezoVektor();
+            /*var k = 0;
+            if (x[k] == 0) {
+                x[k] = 1;
+            } else {
+                while (x[k] != 0) {
+                    x[k] = 0;
+                    k++;
+                }
+                x[k] = 1;
+            }*/
+        }
+        console.log("megoldas: " + megoldas)
+        console.log("maxertek: " + maxertek)
+        //callback();
+    }
+    /**
+     * Teszt adat 1
+     */
+    function teszt1() {
+        maxsuly = 10;
+        maxterfogat = 10;
+        for (var i = 0; i < 5; i++) {
+            suly[i] = i + 1;
+            terfogat[i] = i + 1;
+            ertek[i] = i + 1;
+        }
+        t = 4
+        console.log(suly)
+        console.log(terfogat)
+        console.log(ertek)
+    }
+
+    /**
+     * Teszt adat 2
+     */
+    function teszt2() {
+        maxsuly = 20;
+        maxterfogat = 30;
+        t = 0;
+        suly[t] = 3;
+        terfogat[t] = 13;
+        ertek[t] = 400;
+        t++;
+        suly[t] = 8;
+        terfogat[t] = 7;
+        ertek[t] = 90;
+        t++;
+        suly[t] = 11;
+        terfogat[t] = 6;
+        ertek[t] = 300;
+        t++;
+        suly[t] = 14;
+        terfogat[t] = 21;
+        ertek[t] = 10;
+        t++;
+        suly[t] = 5;
+        terfogat[t] = 4;
+        ertek[t] = 500;
+        t++;
+        console.log(suly)
+        console.log(terfogat)
+        console.log(ertek)
+    }
+
+    /**
+     * Teszt adat 3
+     */
+    function teszt3() {
+        maxsuly = 12;
+        maxterfogat = 14;
+        t = 0;
+        suly[t] = 7;
+        terfogat[t] = 2;
+        ertek[t] = 100;
+        t++;
+        suly[t] = 4;
+        terfogat[t] = 8;
+        ertek[t] = 80;
+        t++;
+        suly[t] = 1;
+        terfogat[t] = 5;
+        ertek[t] = 300;
+        t++;
+        suly[t] = 4;
+        terfogat[t] = 5;
+        ertek[t] = 400;
+        t++;
+        suly[t] = 1;
+        terfogat[t] = 1;
+        ertek[t] = 20;
+        t++;
+        suly[t] = 9;
+        terfogat[t] = 1;
+        ertek[t] = 30;
+        t++;
+        console.log(suly)
+        console.log(terfogat)
+        console.log(ertek)
+    }
+
+    function start() {
+        /*beallit();
+        teszt1();*/
+        //teljesLeszamolas();
+    }
+
+    function lepes() {
+        teljesLeszamolas();
+            if (n < l) {
+                for (var i = 0; i < t; i++) {
+                    megoldas[i] = lehetmegoldas[n][i];
+                }
+                n++;
+                maxertek = 0;
+
+                for (var i = 0; i < t; i++) {
+                    if (megoldas[i] == 1) {
+                        maxertek += ertek[i];
+                    }
+                }
+
+                console.log("megoldas2: " + megoldas)
+                console.log("maxertek2: " + maxertek)
+
+                $("#info").text("")
+                $("#info").append("A most vizsgált tárgyak: ");
+
+                for (var i = 0; i < t; i++) {
+                    if (megoldas[i] == 1) {
+                        $("#info").append("" + (i + 1) + ". ");
+                    }
+                }
+
+                $("#info").append("\nÖsszértékük: " + maxertek + "\n");
+                $("#info").append("\nAz eddigi legjobb választás: ");
+
+                if (emaxert < maxertek) {
+                    for (var i = 0; i < t; i++) {
+                        eddiglegjobb[i] = megoldas[i];
+                        emaxert = maxertek;
+                    }
+                }
+
+                for (var i = 0; i < t; i++) {
+                    if (eddiglegjobb[i] == 1) {
+                        $("#info").append("" + (i + 1) + ". ");
+                    }
+                }
+
+                $("#info").append("\nÖsszértékük: " + emaxert + "\n");
+
+            } else {
+                $("#info").text("")
+                $("#info").append("Az optimális választás: ");
+
+                for (var i = 0; i < t; i++) {
+                    if (megoldas[i] == 1) {
+                        $("#info").append("" + (i + 1) + ". ");
+                    }
+                }
+
+                $("#info").append("\nÖsszértékük: " + maxertek);
+            }
+        
+
+    }
+</script>
+
+</html>
