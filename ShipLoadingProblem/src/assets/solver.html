@@ -2,332 +2,372 @@
 <html lang="hu">
 
 <head>
-    <title>Page Title</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <title>Page Title</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <style>
+    .c {
+        background-image: url("c.jpg");
+        background-size: cover;
+        margin: 5px 5px 5px 5px;
+        border: 2px solid black;
+        padding: 2px 2px 2px 2px;
+    }
+    #lepes{
+       margin-top: 10px;
+    }
+    #rakpart{
+        display: inline-flex;
+    }
+  </style>
 </head>
 
 <body>
+  <p id="info" class="alert alert-primary" role="alert">---</p>
+  <br>
+  <div id="tabla">
+      <div id="rakpart">
+        <div id="1" class="c"></div>
+        <div id="2" class="c"></div>
+        <div id="3" class="c"></div>
+        <div id="4" class="c"></div>
+        <div id="5" class="c"></div>
+      </div>
+      <div id="hajo">
+        <img src="../assets/SHIP_vectorized.png" width="100%" alt="ship">
+      </div>
+  </div>
+  <br>
+  <div class="list-group">
+    <button id="teszt1" onclick="teszt1()" class="btn btn-primary list-group-item ">Első</button>
+    <button id="teszt2" onclick="teszt2()" class="btn btn-primary list-group-item">Második</button>
+    <button id="teszt3" onclick="teszt3()" class="btn btn-primary list-group-item">Harmadik</button>
+    <button id="lepes" onclick="lepes()" class="btn btn-success list-group-item">Léptetés</button>
+    <button id="ujra" onclick="ujra()" class="btn btn-warning list-group-item">Újra</button>
+  </div>
 
-    <button onclick="beallit()">Beállít</button>
-    <button onclick="teszt1()">teszt1</button>
-    <button onclick="teszt2()">teszt2</button>
-    <button onclick="teszt3()">teszt3</button>
-    <button onclick="lepes()">Lepes</button>
-    <br>
-    <p id="info">---</p>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+  </script>
 </body>
 <script>
-    var t;
-    var l;
-    var n;
-    var maxsuly;
-    var maxterfogat;
-    var maxertek;
-    var suly = [];
-    var terfogat = [];
-    var ertek = [];
-    var x = [];
-    var megoldas = [];
-    var lehetmegoldas = [];
-    var eddiglegjobb = [];
-    var emaxert;
+  $(document).ready(() => {
+    $("#lepes").prop("disabled", true)
+    $("#ujra").css("display", "none")
+    $("#info").text("Válassz példát!")
+    $(".c").css("display","none")
+  })
 
-    var info;
-    /*
-        function beallit() {
-            for (var i = 0; i < 10; i++) {
-                suly[i] = 0;
-                terfogat[i] = 0;
-                ertek[i] = 0;
-                megoldas[i] = 0;
-                x[i] = 0;
-                eddiglegjobb[i] = 0;
-                for (var j = 0; j < 1024; j++) {
-                    lehetmegoldas[j + 1024 * i] = 0;
-                }
-            }
-            maxsuly = 0;
-            maxterfogat = 0;
-            maxertek = -1000000;
-            emaxert = 0;
-            t = 0;
-            n = 0;
-            l = 0;
-            /*mehet=false;*/
-    //    }
+  function ujra(){
+      location.reload();
+  }
 
-    function beallit() {
-        for (var j = 0; j < 1024; j++) {
-            lehetmegoldas[j] = []
-        }
-        for (var i = 0; i < 12; i++) {
-            suly[i] = 0;
-            terfogat[i] = 0;
-            ertek[i] = 0;
-            megoldas[i] = 0;
-            x[i] = 0;
-            eddiglegjobb[i] = 0;
-            for (var j = 0; j < 1024; j++) {
-                lehetmegoldas[j][i] = 0;
-            }
-        }
-            maxsuly = 0;
-            maxterfogat = 0;
-            maxertek = -1000000;
-            emaxert = 0;
-            t = 0;
-            n = 0;
-            l = 0;
+
+  var t;
+  var l;
+  var n;
+  var maxsuly;
+  var maxterfogat;
+  var maxertek;
+  var suly = [];
+  var terfogat = [];
+  var ertek = [];
+  var x = [];
+  var megoldas = [];
+  var lehetmegoldas = [];
+  var eddiglegjobb = [];
+  var emaxert;
+
+  var info;
+
+  function beallit() {
+    for (var j = 0; j < 1024; j++) {
+      lehetmegoldas[j] = []
     }
-
-    function kovetkezoVektor() {
-        var k = 0;
-        if (x[k] == 0) {
-            x[k] = 1;
-        } else {
-            while (x[k] != 0) {
-                x[k] = 0;
-                k++;
-            }
-            x[k] = 1;
-        }
-    }
-
-    function teljesLeszamolas() {
-
-        /*for(var i=0;i<10;i++) {
-			suly[i]=0;
-			terfogat[i]=0;
-			ertek[i]=0;
-			megoldas[i]=0;
-			x[i]=0;
-      eddiglegjobb[i]=0;
-			for(var j=0;j<1024;j++){
-        lehetmegoldas[j+1024*i]=0;
+    for (var i = 0; i < 12; i++) {
+      suly[i] = 0;
+      terfogat[i] = 0;
+      ertek[i] = 0;
+      megoldas[i] = 0;
+      x[i] = 0;
+      eddiglegjobb[i] = 0;
+      for (var j = 0; j < 1024; j++) {
+        lehetmegoldas[j][i] = 0;
       }
-		}
-		maxsuly=0;
-		maxterfogat=0;
-		maxertek=-1000000;
-		emaxert = 0;
-		t=0;
-		n=0;
-		l=0;
+    }
+    maxsuly = 0;
+    maxterfogat = 0;
+    maxertek = -1000000;
+    emaxert = 0;
+    t = 0;
+    n = 0;
+    l = 0;
+  }
 
-    maxsuly=10;
-    maxterfogat=10;
-    for(var i=0;i<5;i++) {
-      suly[i]=i+1;
-      terfogat[i]=i+1;
-      ertek[i]=i+1;
-      t++;
-    }*/
+  function kovetkezoVektor() {
+    var k = 0;
+    if (x[k] == 0) {
+      x[k] = 1;
+    } else {
+      while (x[k] != 0) {
+        x[k] = 0;
+        k++;
+      }
+      x[k] = 1;
+    }
+  }
 
-        /*maxsuly=10;
-        maxterfogat=10;
-        suly[t] = 3;   terfogat[t] = 13;    ertek[t] = 400;   t++;
-        suly[t]= 8;   terfogat[t] = 7;    ertek[t] = 90;     t++;
-        suly[t]= 11;   terfogat[t] = 6;    ertek[t] = 300;   t++;
-        suly[t] = 14;   terfogat[t] = 21;    ertek[t] = 10;   t++;
-        suly[t] = 5;   terfogat[t] = 4;    ertek[t] = 500;    t++;*/
+  function teljesLeszamolas() {
 
-        maxertek = -1000000;
-        var S;
-        var T;
-        var E;
-        var lepesszam;
-        l = 0;
-        lepesszam = Math.pow(2, t);
-        for (var i = 0; i < lepesszam; i++) {
-            S = 0;
-            T = 0;
-            E = 0;
-            for (var j = 0; j < t; j++) {
-                S = S + (x[j] * suly[j]);
-                T = T + (x[j] * terfogat[j]);
-            }
-            if ((S <= maxsuly) && (T <= maxterfogat)) {
-                for (var j = 0; j < t; j++) {
-                    E = E + (x[j] * ertek[j]);
-                    lehetmegoldas[l][j]= x[j];
-                }
-                l++;
-            }
-            if (E > maxertek) {
-                maxertek = E;
-                for (var j = 0; j < t; j++)
-                    megoldas[j] = x[j];
-            }
-
-            //console.log("S: " + S + " - T: " + T + " - E: " + E)
-            kovetkezoVektor();
-            /*var k = 0;
-            if (x[k] == 0) {
-                x[k] = 1;
-            } else {
-                while (x[k] != 0) {
-                    x[k] = 0;
-                    k++;
-                }
-                x[k] = 1;
-            }*/
+    maxertek = -1000000;
+    var S;
+    var T;
+    var E;
+    var lepesszam;
+    l = 0;
+    lepesszam = Math.pow(2, t);
+    for (var i = 0; i < lepesszam; i++) {
+      S = 0;
+      T = 0;
+      E = 0;
+      for (var j = 0; j < t; j++) {
+        S = S + (x[j] * suly[j]);
+        T = T + (x[j] * terfogat[j]);
+      }
+      if ((S <= maxsuly) && (T <= maxterfogat)) {
+        for (var j = 0; j < t; j++) {
+          E = E + (x[j] * ertek[j]);
+          lehetmegoldas[l][j] = x[j];
         }
-        console.log("megoldas: " + megoldas)
-        console.log("maxertek: " + maxertek)
-        //callback();
+        l++;
+      }
+      if (E > maxertek) {
+        maxertek = E;
+        for (var j = 0; j < t; j++)
+          megoldas[j] = x[j];
+      }
+
+      //console.log("S: " + S + " - T: " + T + " - E: " + E)
+      kovetkezoVektor();
+      /*var k = 0;
+      if (x[k] == 0) {
+          x[k] = 1;
+      } else {
+          while (x[k] != 0) {
+              x[k] = 0;
+              k++;
+          }
+          x[k] = 1;
+      }*/
     }
-    /**
-     * Teszt adat 1
-     */
-    function teszt1() {
-        maxsuly = 10;
-        maxterfogat = 10;
-        for (var i = 0; i < 5; i++) {
-            suly[i] = i + 1;
-            terfogat[i] = i + 1;
-            ertek[i] = i + 1;
+    console.log("megoldas: " + megoldas)
+    console.log("maxertek: " + maxertek)
+    //callback();
+  }
+  /**
+   * Teszt adat 1
+   */
+  function teszt1() {
+    $("#lepes").prop("disabled", false)
+    $("#teszt1").prop("disabled", true)
+    $("#teszt2").prop("disabled", true)
+    $("#teszt3").prop("disabled", true)
+    $(".c").css("display","")
+    beallit()
+    maxsuly = 10;
+    maxterfogat = 10;
+    for (var i = 0; i < 5; i++) {
+      suly[i] = i + 1;
+      terfogat[i] = i + 1;
+      ertek[i] = i + 1;
+      $("#"+(i+1)+"").text("Súly: "+suly[i]+"\nTérfogat: "+terfogat[i]+"\nÉrték: "+ertek[i]);
+    }
+    t = 4
+    console.log(suly)
+    console.log(terfogat)
+    console.log(ertek)
+  }
+
+  /**
+   * Teszt adat 2
+   */
+  function teszt2() {
+    $("#lepes").prop("disabled", false)
+    $("#teszt1").prop("disabled", true)
+    $("#teszt2").prop("disabled", true)
+    $("#teszt3").prop("disabled", true)
+    $(".c").css("display","")
+    beallit()
+    maxsuly = 20;
+    maxterfogat = 30;
+    t = 0;
+    suly[t] = 3;
+    terfogat[t] = 13;
+    ertek[t] = 400;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    suly[t] = 8;
+    terfogat[t] = 7;
+    ertek[t] = 90;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    suly[t] = 11;
+    terfogat[t] = 6;
+    ertek[t] = 300;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    suly[t] = 14;
+    terfogat[t] = 21;
+    ertek[t] = 10;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    suly[t] = 5;
+    terfogat[t] = 4;
+    ertek[t] = 500;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    console.log(suly)
+    console.log(terfogat)
+    console.log(ertek)
+  }
+
+  /**
+   * Teszt adat 3
+   */
+  function teszt3() {
+    $("#lepes").prop("disabled", false)
+    $("#teszt1").prop("disabled", true)
+    $("#teszt2").prop("disabled", true)
+    $("#teszt3").prop("disabled", true)
+    $(".c").css("display","")
+    beallit()
+    maxsuly = 12;
+    maxterfogat = 14;
+    t = 0;
+    suly[t] = 7;
+    terfogat[t] = 2;
+    ertek[t] = 100;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    suly[t] = 4;
+    terfogat[t] = 8;
+    ertek[t] = 80;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    suly[t] = 1;
+    terfogat[t] = 5;
+    ertek[t] = 300;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    suly[t] = 4;
+    terfogat[t] = 5;
+    ertek[t] = 400;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    suly[t] = 1;
+    terfogat[t] = 1;
+    ertek[t] = 20;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    suly[t] = 9;
+    terfogat[t] = 1;
+    ertek[t] = 30;
+    $("#"+(t+1)+"").text("Súly: "+suly[t]+"\nTérfogat: "+terfogat[t]+"\nÉrték: "+ertek[t]);
+    t++;
+    console.log(suly)
+    console.log(terfogat)
+    console.log(ertek)
+  }
+
+
+  function lepes() {
+    teljesLeszamolas();
+    if (n < l) {
+      for (var i = 0; i < t; i++) {
+        megoldas[i] = lehetmegoldas[n][i];
+      }
+      n++;
+      maxertek = 0;
+
+      for (var i = 0; i < t; i++) {
+        if (megoldas[i] == 1) {
+          maxertek += ertek[i];
         }
-        t = 4
-        console.log(suly)
-        console.log(terfogat)
-        console.log(ertek)
-    }
+      }
 
-    /**
-     * Teszt adat 2
-     */
-    function teszt2() {
-        maxsuly = 20;
-        maxterfogat = 30;
-        t = 0;
-        suly[t] = 3;
-        terfogat[t] = 13;
-        ertek[t] = 400;
-        t++;
-        suly[t] = 8;
-        terfogat[t] = 7;
-        ertek[t] = 90;
-        t++;
-        suly[t] = 11;
-        terfogat[t] = 6;
-        ertek[t] = 300;
-        t++;
-        suly[t] = 14;
-        terfogat[t] = 21;
-        ertek[t] = 10;
-        t++;
-        suly[t] = 5;
-        terfogat[t] = 4;
-        ertek[t] = 500;
-        t++;
-        console.log(suly)
-        console.log(terfogat)
-        console.log(ertek)
-    }
+      console.log("megoldas2: " + megoldas)
+      console.log("maxertek2: " + maxertek)
 
-    /**
-     * Teszt adat 3
-     */
-    function teszt3() {
-        maxsuly = 12;
-        maxterfogat = 14;
-        t = 0;
-        suly[t] = 7;
-        terfogat[t] = 2;
-        ertek[t] = 100;
-        t++;
-        suly[t] = 4;
-        terfogat[t] = 8;
-        ertek[t] = 80;
-        t++;
-        suly[t] = 1;
-        terfogat[t] = 5;
-        ertek[t] = 300;
-        t++;
-        suly[t] = 4;
-        terfogat[t] = 5;
-        ertek[t] = 400;
-        t++;
-        suly[t] = 1;
-        terfogat[t] = 1;
-        ertek[t] = 20;
-        t++;
-        suly[t] = 9;
-        terfogat[t] = 1;
-        ertek[t] = 30;
-        t++;
-        console.log(suly)
-        console.log(terfogat)
-        console.log(ertek)
-    }
+      $("#info").text("")
+      $("#info").append("A most vizsgált tárgyak: ");
 
-    function start() {
-        /*beallit();
-        teszt1();*/
-        //teljesLeszamolas();
-    }
+      for(var z=0; z<5; z++){
+          $("#"+(z+1)+"").css("background-image","url('c.jpg')")
+          $("#"+(z+1)+"").css("color","black")
+      }
 
-    function lepes() {
-        teljesLeszamolas();
-            if (n < l) {
-                for (var i = 0; i < t; i++) {
-                    megoldas[i] = lehetmegoldas[n][i];
-                }
-                n++;
-                maxertek = 0;
+      for (var i = 0; i < t; i++) {
+        if (megoldas[i] == 1) {
+          $("#info").append("" + (i + 1) + ". ");
+          
+          $("#"+(i+1)+"").css("background-image","none")
+          $("#"+(i+1)+"").css("background-color","lightblue")
+          $("#"+(i+1)+"").css("color","red")
+        }
+      }
 
-                for (var i = 0; i < t; i++) {
-                    if (megoldas[i] == 1) {
-                        maxertek += ertek[i];
-                    }
-                }
+      $("#info").append("\nÖsszértékük: " + maxertek + "<br>\n");
+      $("#info").append("\nAz eddigi legjobb választás: ");
 
-                console.log("megoldas2: " + megoldas)
-                console.log("maxertek2: " + maxertek)
+      if (emaxert < maxertek) {
+        for (var i = 0; i < t; i++) {
+          eddiglegjobb[i] = megoldas[i];
+          emaxert = maxertek;
+        }
+      }
 
-                $("#info").text("")
-                $("#info").append("A most vizsgált tárgyak: ");
+      for (var i = 0; i < t; i++) {
+        if (eddiglegjobb[i] == 1) {
+          $("#info").append("" + (i + 1) + ". ");
+        }
+      }
 
-                for (var i = 0; i < t; i++) {
-                    if (megoldas[i] == 1) {
-                        $("#info").append("" + (i + 1) + ". ");
-                    }
-                }
+      $("#info").append("\nÖsszértékük: " + emaxert + "\n");
 
-                $("#info").append("\nÖsszértékük: " + maxertek + "\n");
-                $("#info").append("\nAz eddigi legjobb választás: ");
+    } else {
+      $("#info").text("")
+      $("#info").append("Az optimális választás: ");
 
-                if (emaxert < maxertek) {
-                    for (var i = 0; i < t; i++) {
-                        eddiglegjobb[i] = megoldas[i];
-                        emaxert = maxertek;
-                    }
-                }
-
-                for (var i = 0; i < t; i++) {
-                    if (eddiglegjobb[i] == 1) {
-                        $("#info").append("" + (i + 1) + ". ");
-                    }
-                }
-
-                $("#info").append("\nÖsszértékük: " + emaxert + "\n");
-
-            } else {
-                $("#info").text("")
-                $("#info").append("Az optimális választás: ");
-
-                for (var i = 0; i < t; i++) {
-                    if (megoldas[i] == 1) {
-                        $("#info").append("" + (i + 1) + ". ");
-                    }
-                }
-
-                $("#info").append("\nÖsszértékük: " + maxertek);
-            }
+      for(var z=0; z<5; z++){
+          $("#"+(z+1)+"").css("background-image","url('c.jpg')")
+          $("#"+(z+1)+"").css("color","black")
+      }
+      
+    $("#lepes").prop("disabled", true)
+      for (var i = 0; i < t; i++) {
+        if (megoldas[i] == 1) {
+          $("#info").append("" + (i + 1) + ". ");
+          $("#"+(i+1)+"").css("background-image","none")
+          $("#"+(i+1)+"").css("background-color","green")
+          $("#"+(i+1)+"").css("color","white")
+        }
+      }
+      $("#lepes").prop("disabled", true)
         
+        $("#ujra").css("display", "unset")
 
+      $("#info").append("\nÖsszértékük: " + maxertek);
+      $("#info").removeClass("alert-primary")
+        .addClass("alert-success");
+      $("#lepes").prop("disabled", false)
     }
+
+
+  }
+
 </script>
 
 </html>
